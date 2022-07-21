@@ -18,7 +18,9 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
 
 
   const filterAllEntries = (moodId) => {
-    const filteredEntriesByMood = entries.filter(entry => entry.moodId === parseInt(moodId))
+
+    const filteredEntriesByMood = entries.filter(entry => entry.mood_id === parseInt(moodId))
+
     setEntries(filteredEntriesByMood)
     setMoodSelected(parseInt(moodId))
   }
@@ -28,7 +30,7 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
     <article className="panel is-primary">
       <h1 className="panel-heading">Entries</h1>
       <p className="panel-tabs">
-      {/* eslint-disable-next-line */}
+        {/* eslint-disable-next-line */}
         <a href="#" className={moodSelected === "" ? "is-active" : ""} onClick={() => {
           setEntries(entries)
           setMoodSelected("")
@@ -36,9 +38,9 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
         {
           // eslint-disable-next-line
           moods.map(mood => (<a key={mood.id}
-              onClick={() => filterAllEntries(mood.id)}
-              className={moodSelected === mood.id ? "is-active" : ""}
-            >{mood.label}</a>
+            onClick={() => filterAllEntries(mood.id)}
+            className={moodSelected === mood.id ? "is-active" : ""}
+          >{mood.label}</a>
           ))
         }
       </p>

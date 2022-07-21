@@ -36,15 +36,19 @@
     },
     {
       "id": 2,
-      "label": "Sad"
+      "label": "Unconcerned"
     },
     {
       "id": 3,
-      "label": "Angry"
+      "label": "Tragic"
     },
     {
       "id": 4,
       "label": "Ok"
+    },
+    {
+      "id": 5,
+      "label": "TIL"
     }
   ]
 }

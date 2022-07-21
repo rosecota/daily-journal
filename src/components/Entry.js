@@ -4,13 +4,13 @@ export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick }) =
   const getMessageType = () => {
     if (mood) {
       switch (mood.label) {
-        case 'Angry':
+        case 'Tragic':
           return 'is-danger'
         case 'Happy':
           return 'is-success'
         case 'Ok':
           return 'is-warning'
-        case 'Sad':
+        case 'Unconcerned':
           return 'is-primary'
         default:
           break;
@@ -19,7 +19,7 @@ export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick }) =
   }
 
   return (
-    <article className={`message ${getMessageType()}`} style={{width:"100%"}}>
+    <article className={`message ${getMessageType()}`} style={{ width: "100%" }}>
       <div className="message-body">
         <p className="entry__concept">{entry.concept}</p>
         <p className="entry__entry">{entry.entry}</p>
