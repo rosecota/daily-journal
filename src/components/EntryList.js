@@ -46,10 +46,17 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
       </p>
       <div className="panel-block">
         <p className="control has-icons-left">
-          <input className="input is-primary" type="text" placeholder="Search" onKeyUp={
+          <input className="input is-rounded" type="text" placeholder="🔍 Search" onKeyDown={
             (event) => {
               const searchTerm = event.target.value
-              setTerm(searchTerm)
+              switch (event.key) {
+                case "Enter":
+                  // Only fetch term on "enter" or "return" key press.
+                  setTerm(searchTerm)
+                  break;
+                default:
+                  return; // Quit when this doesn't handle the key event.
+              }
             }
           } />
         </p>
@@ -59,7 +66,7 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
         return <div className="panel-block" key={entry.id}>
           <Entry
             entry={entry}
-            mood={moods.find(m => m.id === entry.moodId)}
+            mood={entry.mood}
             onEditButtonClick={onEditButtonClick}
             onDeleteButtonClick={onDeleteButtonClick}
           />

@@ -4,14 +4,16 @@ export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick }) =
   const getMessageType = () => {
     if (mood) {
       switch (mood.label) {
-        case 'Tragic':
-          return 'is-danger'
+        case 'Unconcerned':
+          return 'is-primary'
+        case 'TIL':
+          return 'is-info'
         case 'Happy':
           return 'is-success'
         case 'Ok':
           return 'is-warning'
-        case 'Unconcerned':
-          return 'is-primary'
+        case 'Tragic':
+          return 'is-danger'
         default:
           break;
       }
@@ -24,7 +26,7 @@ export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick }) =
         <p className="entry__concept">{entry.concept}</p>
         <p className="entry__entry">{entry.entry}</p>
         <p className="entry__date">{entry.date}</p>
-        <p className="entry__mood">{mood?.label}</p>
+        <p className="entry__mood">~{mood?.label}~</p>
         <div className="buttons">
           <button className={`button ${getMessageType()} is-outlined`} onClick={
             () => {
