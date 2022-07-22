@@ -67,6 +67,7 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
           <Entry
             entry={entry}
             mood={entry.mood}
+            tags={entry.tags}
             onEditButtonClick={onEditButtonClick}
             onDeleteButtonClick={onDeleteButtonClick}
           />

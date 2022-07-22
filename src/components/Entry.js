@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick }) => {
+export const Entry = ({ entry, mood, tags, onEditButtonClick, onDeleteButtonClick }) => {
   const getMessageType = () => {
     if (mood) {
       switch (mood.label) {
@@ -38,6 +38,11 @@ export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick }) =
               onDeleteButtonClick(entry.id)
             }
           }>Delete</button>
+        </div>
+        <div className="tags">
+          {tags.map(tag => {
+            return <span className="tag is-white is-rounded">{tag?.label}</span>
+          })}
         </div>
       </div>
     </article>
