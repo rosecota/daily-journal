@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react"
 
-export const EntryForm = ({ entry, moods, onFormSubmit }) => {
+export const EntryForm = ({ entry, moods, tags, onFormSubmit }) => {
     const [editMode, setEditMode] = useState(false)
     const [updatedEntry, setUpdatedEntry] = useState(entry)
+    // needs to be an array with number of tags coming from api 
+    const [checkedState, setCheckedState] = useState([]);
+    const [isChecked, setIsChecked] = useState(false)
 
     useEffect(() => {
         setUpdatedEntry(entry)
@@ -19,12 +22,26 @@ export const EntryForm = ({ entry, moods, onFormSubmit }) => {
             When changing a state object or array, always create a new one
             and change state instead of modifying current one
         */
-        const newEntry ={...updatedEntry}
+        const newEntry = { ...updatedEntry }
         newEntry[event.target.name] = event.target.value
         setUpdatedEntry(newEntry)
     }
 
+    const handleOnChange = (position) => {
+        console.log(position);
+        // if the ma
 
+        const updatedCheckedState = checkedState.map((item, index) =>
+
+            index === position ? !item : item
+        );
+        console.log(updatedCheckedState);
+
+
+        setCheckedState(updatedCheckedState);
+
+
+    };
 
     const constructNewEntry = () => {
         const copyEntry = { ...updatedEntry }
@@ -70,16 +87,43 @@ export const EntryForm = ({ entry, moods, onFormSubmit }) => {
                                     proptype="int"
                                     value={updatedEntry.moodId}
                                     onChange={handleControlledInputChange}>
-                                        <option value="0">Select a mood</option>
-                                        {moods.map(m => (
-                                            <option key={m.id} value={m.id}>
-                                                {m.label}
-                                            </option>
-                                        ))}
+                                    <option value="0">Select a mood</option>
+                                    {moods.map(m => (
+                                        <option key={m.id} value={m.id}>
+                                            {m.label}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
                     </div>
+
+                    <div className="field">
+                        <label htmlFor="tagId" className="label">Tags: </label>
+                        <div className="control">
+                            <div className="checkboxes">
+                                {tags.map(tag => (
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            name="newEntryTagCheckbox"
+                                            value={tag.id}
+                                            checked={checkedState[tag.id]}
+                                            onChange={(event) => {
+                                                if (event.target.checked) {
+                                                    const copy = [...checkedState]
+                                                    copy.push(tag.id)
+                                                    setCheckedState(copy)
+                                                }
+                                            }}
+                                        />
+                                        <span>{tag.label}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="field">
                         <div className="control">
                             <button type="submit"
